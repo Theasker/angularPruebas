@@ -5,35 +5,46 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class ThousandsPipe implements PipeTransform {
   transform(value: any, args?: any): any {
-    console.log('isNaN(value): ',value + ' ' + isNaN(value));    
+    console.log('Value: ', value + " / " + 'typeof(value): ' + typeof(value));
     let resultado: string;
-    if (isNaN(value)){ // Si no es un número
-      console.log('No es un número: ', value);
+    if (isNaN(value)){ // NO es un número
+      // 10.568.456.122,55
+      let pattern: any = /^(([0-9]{1,3}\.)*([0-9]{1,3})(\,[0-9]*)?)?([0-9]*)?$/;
+
+      console.log('pattern.test(value): ', pattern.test(value));
+      if (pattern.test(value)){
+        //resultado = value.replace('.', '');
+        let search = '.';
+        let replacement = '';
+        resultado = value;
+        let temp: string[] = resultado.split(search);
+        resultado = temp.join(replacement);
+        resultado = resultado.replace(',', '.');
+        console.log('resultado: ', resultado);
+      }else {
+        console.log('El número introducido no es correcto');
+      }
     }else { // Si es un número
+      console.log('Es un número');
       let flotante: number = parseFloat(value);
       let flotanteString = flotante.toFixed(2);
       resultado = flotanteString.replace('.', ',');
-      console.log('flotanteString: ', flotanteString);
+    
       let pos = resultado.indexOf(",");
       
-      
-      // array.splice(start[, deleteCount[, item1[, item2[, ...]]]])
-      console.log('pos: ', pos);
+      // string.substr(<desde>, <longitud>);
       while (pos > 3) {
-        console.log('flotanteString.substr(0, pos-3): ', flotanteString.substr(0, pos-3));
-        resultado = flotanteString.substr(0, pos-3)+'.'+flotanteString.substr(pos-3, pos)+flotanteString.substr(pos);
+        resultado = resultado.substr(0, pos-3)+'.'+resultado.substr(pos-3, 3)+resultado.substr(pos);
+        //resultado = resultado.substr(0, pos-3);
         pos=pos-3;
-        console.log('pos: ', pos);
       }
-      
-      
-      //let resultadoString = 
-      console.log('Resultado (es un número): ', resultado);
     }
-    
     //resultado value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-    
     return resultado;
+  }
+
+  filterStringNumber (stringNumber: string): string {
+    return '';
   }
 
 }
