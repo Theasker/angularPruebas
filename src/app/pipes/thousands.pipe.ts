@@ -8,6 +8,7 @@ export class ThousandsPipe implements PipeTransform {
     console.log('Value: ', value + " / " + 'typeof(value): ' + typeof(value));
     let resultado: string;
     if (isNaN(value)){ // NO es un número
+      console.log('No es un número');
       // 10.568.456.122,55
       let pattern: any = /^(([0-9]{1,3}\.)*([0-9]{1,3})(\,[0-9]*)?)?([0-9]*)?$/;
       if (pattern.test(value)){
@@ -30,7 +31,10 @@ export class ThousandsPipe implements PipeTransform {
     //resultado value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     return resultado;
   }
-
+  /**
+   * @param  {string} stringNumber
+   * @returns string
+   */
   numberToString (stringNumber: string): string {
     let resultado: string;
     let flotante: number = parseFloat(stringNumber);
@@ -45,7 +49,10 @@ export class ThousandsPipe implements PipeTransform {
     }
     return resultado;
   }
-
+  /**
+   * @param  {string} stringNumber
+   * @returns string
+   */
   parseStringNumber (stringNumber: string): string {
     let resultado: string;
     let search: string = '.';
