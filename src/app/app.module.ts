@@ -15,13 +15,15 @@ import { AppComponent } from './app.component';
 import { ThousandsPipe } from './pipes/thousands.pipe';
 import { Angular2TextMaskComponent } from './angular2-text-mask/angular2-text-mask.component';
 import { NgxMaskComponent } from './ngx-mask/ngx-mask.component';
+import { MyCurrencyPipe } from './pipes/my-currency.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     ThousandsPipe,
     Angular2TextMaskComponent,
-    NgxMaskComponent
+    NgxMaskComponent,
+    MyCurrencyPipe
   ],
   imports: [
     BrowserModule,

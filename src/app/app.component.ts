@@ -20,9 +20,10 @@ export class AppComponent {
    * @param  {any} value
    */
   cambioCampo(value: any){
-    console.log('value: ', value);
+    console.log('Value: ', value + " / " + 'typeof(value): ' + typeof(value));
     if (isNaN(value)){ // NO es un número correcto
       // 10.568.456.122,55
+/* 
       let pattern: any = /^(([0-9]{1,3}\.)*([0-9]{1,3})(\,[0-9]*)?)?([0-9]*)?$/;
       console.log('pattern.test(value): ', pattern.test(value));
       if (pattern.test(value)){
@@ -38,8 +39,12 @@ export class AppComponent {
           this.numero = parseFloat(this.cleanString(value));
         }
       }
+ */
+      this.numero = parseFloat(this.cleanString(value));
+      console.log('NO es número -> this.numero: ', this.numero);
     }else {
       this.numero = parseFloat(value);
+      console.log('ES número -> this.numero: ', this.numero);
     }
   }
   
@@ -60,6 +65,11 @@ export class AppComponent {
     return result;
   }
 
+  /**
+   * Limpia cualquier string dejando sólo los números y cambiando la coma por punto decimal
+   * @param  {string} dirtyString
+   * @returns string
+   */
   cleanString (dirtyString: string): string {
     let result: string = '';
     let patternNumber: any = /\d/;
@@ -74,7 +84,6 @@ export class AppComponent {
         }
       }
     }
-    console.log('result: ', result);
     return result;
   }
 }
