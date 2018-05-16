@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
 import { merge } from 'rxjs';
+//import { MyCurrencyFormatterDirective } from "./directivas/my-currency-formatter.directive";
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+
 })
 
 export class AppComponent {
