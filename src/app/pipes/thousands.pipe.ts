@@ -59,7 +59,7 @@ export class ThousandsPipe implements PipeTransform {
   }
 
   /**
-   * Convierte un numero con formato 00.000.000,00 a 
+   * Convierte un numero con formato 00.000.000,00 a un número
    * @param {string} stringNumber
    * @returns string
    */

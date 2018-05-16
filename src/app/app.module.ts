@@ -9,7 +9,7 @@ registerLocaleData(localeEs);
 import { FormsModule } from '@angular/forms';
 import { TextMaskModule } from 'angular2-text-mask';
 
-import { NgxMaskModule } from 'ngx-mask'
+import { NgxMaskModule } from 'ngx-mask';
 // Componentes
 import { AppComponent } from './app.component';
 // Módulos de máscara de terceros
@@ -25,9 +25,9 @@ import { MyCurrencyFormatterDirective } from './directivas/my-currency-formatter
   declarations: [
     AppComponent,
     ThousandsPipe,
+    MyCurrencyPipe,
     Angular2TextMaskComponent,
     NgxMaskComponent,
-    MyCurrencyPipe,
     MyCurrencyFormatterDirective
   ],
   imports: [
@@ -40,7 +40,9 @@ import { MyCurrencyFormatterDirective } from './directivas/my-currency-formatter
     MyCurrencyFormatterDirective
   ],
   providers: [
-    { provide: LOCALE_ID, useValue:"es-ES" }
+    { provide: LOCALE_ID, useValue: 'es-ES' },
+    MyCurrencyPipe,
+    ThousandsPipe
   ],
   bootstrap: [AppComponent]
 })
