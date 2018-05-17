@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { merge } from 'rxjs';
 //import { MyCurrencyFormatterDirective } from "./directivas/my-currency-formatter.directive";
 
@@ -9,14 +9,18 @@ import { merge } from 'rxjs';
 
 })
 
-export class AppComponent {
-  numero: number;
+export class AppComponent implements OnInit {
+  
+  public numero: number;
   
   constructor() {
-    this.numero = 1234567890.367;
+    
     //this.numero = '1.234.567.890,37';
   }
-  
+
+  ngOnInit(): void {
+    this.numero = 1234567890.367;
+  }  
   
   /**
    * @param  {any} value

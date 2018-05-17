@@ -10,7 +10,8 @@
       type="text"
       [value]="numero | thousands"
       (change)="cambioCampo($event.target.value)"
-      (ngModelChange)="numero=$event" />
+      (ngModelChange)="numero=$event"
+      (keypress)="teclaPulsada($event)" />
   </p>
   <p>
     Directiva:<br />
@@ -31,7 +32,7 @@
   <h4>ThousandsPipe: {{numero | thousands}}</h4>
   <h4>MyCurrencyPipe: {{numero | myCurrency}}</h4>
   <hr>
-  <app-angular2-text-mask></app-angular2-text-mask>
+  <!-- <app-angular2-text-mask></app-angular2-text-mask>
   <hr>
-  <app-ngx-mask></app-ngx-mask>
+  <app-ngx-mask></app-ngx-mask> -->
 </div>

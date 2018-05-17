@@ -42,8 +42,7 @@ export class ThousandsPipe implements PipeTransform {
    * @param  {string} stringNumber
    * @returns string
    */
-  numberToString (stringNumber: string): string {
-    console.log('Limpiando...');
+  public numberToString (stringNumber: string): string {
     let resultado: string;
     let flotante: number = parseFloat(stringNumber);
     let flotanteString = flotante.toFixed(2);
@@ -63,7 +62,7 @@ export class ThousandsPipe implements PipeTransform {
    * @param {string} stringNumber
    * @returns string
    */
-  parseStringNumber (stringNumber: string): string {
+  public parseStringNumber (stringNumber: string): string {
     let resultado: string;
     let search: string = '.';
     let replacement: string = '';
@@ -79,7 +78,7 @@ export class ThousandsPipe implements PipeTransform {
    * @param  {string} dirtyString
    * @returns string
    */
-  cleanString (dirtyString: string): string {
+  public cleanString (dirtyString: string): string {
     let result: string = '';
     let patternNumber: any = /\d/;
     let patternChar: any = /\D/;
