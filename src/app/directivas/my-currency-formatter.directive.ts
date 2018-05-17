@@ -1,4 +1,4 @@
-import { Directive, HostListener,Renderer, ElementRef, OnInit, AfterViewInit } from '@angular/core';
+import { Directive, Output, HostListener, ElementRef, OnInit } from '@angular/core';
 
 import { MyCurrencyPipe } from '../pipes/my-currency.pipe';
 import { ThousandsPipe } from '../pipes/thousands.pipe';
@@ -7,39 +7,25 @@ import { ThousandsPipe } from '../pipes/thousands.pipe';
 @Directive({
   selector: '[appMyCurrencyFormatter]'
 })
-export class MyCurrencyFormatterDirective implements OnInit, AfterViewInit {
-    private el: HTMLInputElement;
-    // Permite números decimales. El \. es para que ocurra sólo una vez
-    private regex: RegExp = new RegExp(/^[0-9]+(\.[0-9]*){0,1}$/g);
-    // Backspace, tab, end, home
-    private specialKeys: Array<string> = [ 'Backspace','Tab','End','Home','ArrowRight','ArrowLeft' ];
-
+export class MyCurrencyFormatterDirective implements OnInit {
+  private el: HTMLInputElement;
+  // Permite números decimales. El \. es para que ocurra sólo una vez
+  private regex: RegExp = new RegExp(/^[0-9]+(\.[0-9]*){0,1}$/g);
+  // Backspace, tab, end, home
+  private specialKeys: Array<string> = [ 'Backspace','Tab','End','Home','ArrowRight','ArrowLeft','Delete' ];
+  
   constructor(
     private _elementRef: ElementRef,
-    private _renderer: Renderer,
     private _currencyPipe: MyCurrencyPipe,
     private _thousandsPipe: ThousandsPipe
   ) {
     this.el = this._elementRef.nativeElement;
-    console.log('Constructor: this.el.value: ', this.el.value);
-    this.el.value = 'prueba Constructor';
-    
-  }
-
-  writeValue(value: string): void {
-    this._renderer.setElementProperty(this._elementRef.nativeElement, 'valueAsDate', value);
+    console.log('Constructor: this.el.value: ', this.el.value);   
   }
 
   ngOnInit(): void {
-    // this.el.value = this._currencyPipe.transform(this.el.value);
-    //this._elementRef.nativeElement.value = this._currencyPipe.transform(this.el.value);
-    
-    //this.el.value = this._thousandsPipe.numberToString(this.el.value);
+    this.el.value = this._thousandsPipe.numberToString(this.el.value);
     //this.el.value = 'prueba ngOnInit';
-  }
-
-  ngAfterViewInit(): void {
-    console.log('ngAfterViewInit: this._elementRef.nativeElement.value: ', this.el.value);
   }
 
   @HostListener('focus', ['$event.target.value'])

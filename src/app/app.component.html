@@ -11,12 +11,12 @@
       [value]="numero | thousands"
       (change)="cambioCampo($event.target.value)"
       (ngModelChange)="numero=$event"
-      (keypress)="teclaPulsada($event)" />
+      (keypress)="pulsoTecla($event)"/>
   </p>
   <p>
-    Directiva:<br />
+    Input con directiva:<br />
     <input type="text" 
-      [ngModel]="numero" 
+      [ngModel]="numero | thousands" 
       (ngModelChange)="cambioCampo($event.target.value)" 
       appMyCurrencyFormatter />
   </p>
@@ -26,7 +26,7 @@
   </p>
     
   <p>
-    <h4>Número del modelo:<br />{{numero}}</h4>
+    <h4>Modelo:<br />{{numero}}</h4>
   <!-- <h2>{{numero | number:'1.2-2':'es-ES'}}</h2> -->
   <!-- <h2>Currency: {{numero | currency:cheatSymbol:'':'4.2-2':'es-ES'}}</h2> -->
   <h4>ThousandsPipe: {{numero | thousands}}</h4>
