@@ -5,21 +5,30 @@
     <!-- currency:cheatSymbol:'':'4.2-2':'es-ES' -->
     <!-- (\d{1,3}\.)?(\d{1,3}\.)?\d{1,3}(\,\d)? -->
     Input con filtro<br />
-    <input 
+    <!-- <input 
       name="numero"
       type="text"
       [value]="numero | thousands"
       (change)="cambioCampo($event.target.value)"
       (ngModelChange)="numero=$event"
+      (keypress)="pulsoTecla($event)"/> -->
+    <input 
+      name="numero"
+      type="text"
+      [value]="numero | thousands"
+      (change)="numero=$event"
       (keypress)="pulsoTecla($event)"/>
   </p>
-  <p>
+  <!-- <p>
     Input con directiva:<br />
     <input type="text" 
-      [ngModel]="numero | thousands" 
-      (ngModelChange)="cambioCampo($event.target.value)" 
+      [(ngModel)]="numero"
       appMyCurrencyFormatter />
-  </p>
+    <input type="text" 
+      [value]="numero | thousands"
+      (ngModelChange)="numero=$event"
+      appMyCurrencyFormatter />
+  </p> -->
   <p>
     Configuración sólo con html5<br />
     <input id="html" type="number" step="any" [(ngModel)]="numero">
@@ -29,8 +38,8 @@
     <h4>Modelo:<br />{{numero}}</h4>
   <!-- <h2>{{numero | number:'1.2-2':'es-ES'}}</h2> -->
   <!-- <h2>Currency: {{numero | currency:cheatSymbol:'':'4.2-2':'es-ES'}}</h2> -->
-  <h4>ThousandsPipe: {{numero | thousands}}</h4>
-  <h4>MyCurrencyPipe: {{numero | myCurrency}}</h4>
+  <h4>currency de Angular: {{numero | currency:cheatSymbol:'':'4.2-2':'es-ES'}}</h4>
+  <!-- <h4>MyCurrencyPipe: {{numero | myCurrency}}</h4> -->
   <hr>
   <!-- <app-angular2-text-mask></app-angular2-text-mask>
   <hr>

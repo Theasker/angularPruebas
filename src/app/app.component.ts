@@ -12,12 +12,12 @@ export class AppComponent implements OnInit {
   public numero: number;
   
   constructor() {
-    //this.numero = '1.234.567.890,37';
+    this.numero = 1234567890.37;
   }
 
   
   ngOnInit() {
-    this.numero = 1234567890.367;
+    //this.numero = 1234567890.367;
   }  
   
   /**
@@ -90,21 +90,21 @@ export class AppComponent implements OnInit {
     }
     return result;
   }
-
+  /**
+   * Filtra las teclas pulsadas para que solo se pueda pulsar números, '.', y ','
+   * @param  {KeyboardEvent} event
+   */
   pulsoTecla(event: KeyboardEvent) {
-    console.log('event: ', event);
     // Permite números decimales. El \. es para que ocurra sólo una vez
     let regex: RegExp = new RegExp(/^[0-9]+(\.[0-9]*){0,1}$/g);
     // Backspace, tab, end, home
-    let specialKeys: Array<string> = [ 'Backspace','Tab','End','Home','ArrowRight','ArrowLeft','Delete' ];
+    let specialKeys: Array<string> = [ 'Backspace','Tab','End','Home','ArrowRight','ArrowLeft','Delete','.',',' ];
     // Permite Backspace, tab, end, y home keys
     if (specialKeys.indexOf(event.key) !== -1) {
       return;
     }
-
     // No usar event.keycode está deprecado.
     // ver: https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/keyCode
-    
     let current: string = String(this.numero);
     // We need this because the current value on the DOM element
     // is not yet updated with the value from this event
@@ -112,6 +112,5 @@ export class AppComponent implements OnInit {
     if (next && !String(next).match(regex)) {
       event.preventDefault();
     }
-
   }
 }
