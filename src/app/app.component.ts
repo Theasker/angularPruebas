@@ -11,44 +11,29 @@ import { merge } from 'rxjs';
 export class AppComponent implements OnInit {
   public numero: number;
   
-  constructor() {
-    this.numero = 1234567890.37;
-  }
-
+  constructor() {  }
   
   ngOnInit() {
-    //this.numero = 1234567890.367;
+    if (this.numero == null){
+      this.numero = 0.00;
+    }    
   }  
   
   /**
+   * Controla el cambio del input para parsear el varlor dependiendo del dato recibido
    * @param  {any} value
    */
   cambioCampo(value: any){
     console.log('Value: ', value + " / " + 'typeof(value): ' + typeof(value));
     if (isNaN(value)){ // NO es un número correcto
-      // 10.568.456.122,55
-/* 
-      let pattern: any = /^(([0-9]{1,3}\.)*([0-9]{1,3})(\,[0-9]*)?)?([0-9]*)?$/;
-      console.log('pattern.test(value): ', pattern.test(value));
-      if (pattern.test(value)){
-        console.log('El número introducido está con separadores de miles y con coma decimal');
-        this.numero = parseFloat(this.parseStringNumber(value));
-      }else {
-        pattern = /^((([0-9])+(\.)*)*([0-9]{1,3})(\,[0-9]*)?)?([0-9]*)?$/;
-        if (pattern.test(value)) {
-          console.log('El número introducido contiene puntos y coma decimal');
-          this.numero = parseFloat(this.parseStringNumber(value));
-        }else {
-          console.log('El número es ilegible. Intentando convertirlo a número');
-          this.numero = parseFloat(this.cleanString(value));
-        }
-      }
- */
       this.numero = parseFloat(this.cleanString(value));
       console.log('NO es número -> this.numero: ', this.numero);
     }else {
-      this.numero = parseFloat(value);
+      //this.numero = parseFloat(value);
       console.log('ES número -> this.numero: ', this.numero);
+      let stringNumber: string = String(value);
+      console.log('stringNumber: ', stringNumber);
+      this.numero = parseFloat(this.cleanString(stringNumber));
     }
   }
   
@@ -59,6 +44,7 @@ export class AppComponent implements OnInit {
    * @returns string
    */
   parseStringNumber (stringNumber: string): string {
+    console.log('stringNumber: ', stringNumber);
     let result: string;
     let search: string = '.';
     let replacement: string = '';
@@ -90,6 +76,7 @@ export class AppComponent implements OnInit {
     }
     return result;
   }
+
   /**
    * Filtra las teclas pulsadas para que solo se pueda pulsar números, '.', y ','
    * @param  {KeyboardEvent} event

@@ -16,8 +16,9 @@
       name="numero"
       type="text"
       [value]="numero | thousands"
-      (change)="numero=$event"
-      (keypress)="pulsoTecla($event)"/>
+      (change)="cambioCampo($event.target.value)"
+      (keypress)="pulsoTecla($event)"
+      value="0,00" />
   </p>
   <!-- <p>
     Input con directiva:<br />
@@ -29,10 +30,10 @@
       (ngModelChange)="numero=$event"
       appMyCurrencyFormatter />
   </p> -->
-  <p>
+<!--   <p>
     Configuración sólo con html5<br />
     <input id="html" type="number" step="any" [(ngModel)]="numero">
-  </p>
+  </p> -->
     
   <p>
     <h4>Modelo:<br />{{numero}}</h4>

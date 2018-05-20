@@ -9,27 +9,14 @@ export class ThousandsPipe implements PipeTransform {
   transform(value: any, args?: any): any {
     console.log('Value: ', value + " / " + 'typeof(value): ' + typeof(value));
     let resultado: string;
+    /* if (value == null) {
+      value = 0;
+      return '0,00';
+    }  */
     if (isNaN(value)){ // NO es un número
       console.log('No es un número');
-/* 
-      // 10.568.456.122,55
-      let pattern: any = /^(([0-9]{1,3}\.)*([0-9]{1,3})(\,[0-9]*)?)?([0-9]*)?$/;
-      if (pattern.test(value)){
-        //resultado = value.replace('.', '');
-        resultado = this.parseStringNumber(value);
-      }else {
-        pattern = /^((([0-9])+(\.)*)*([0-9]{1,3})(\,[0-9]*)?)?([0-9]*)?$/;
-        if (pattern.test(value)) {
-          resultado = this.parseStringNumber(value);
-        }else { // No coincide con ningún patrón
-          console.log('No coincide con ningún patrón');
-          resultado = 'error';
-        }
-        console.log('resultado: ', resultado);
-        console.log('El número introducido no es correcto');
-      }
-       */
-      resultado = this.cleanString(this.parseStringNumber(value));
+      //resultado = this.cleanString(this.parseStringNumber(value));
+      console.log('resultado: ', resultado);
     }else { // Si es un número
       resultado = this.numberToString(value);
     }
@@ -39,6 +26,7 @@ export class ThousandsPipe implements PipeTransform {
   }
 
   /**
+   * Convierte un número 1234.45 a formato 1.234,45
    * @param  {string} stringNumber
    * @returns string
    */
@@ -63,6 +51,7 @@ export class ThousandsPipe implements PipeTransform {
    * @returns string
    */
   public parseStringNumber (stringNumber: string): string {
+    console.log('parseStringNumber stringNumber: ', stringNumber);
     let resultado: string;
     let search: string = '.';
     let replacement: string = '';
@@ -70,7 +59,8 @@ export class ThousandsPipe implements PipeTransform {
     let temp: string[] = resultado.split(search);
     resultado = temp.join(replacement);
     resultado = resultado.replace(',', '.');
-    return resultado;
+    console.log('parseStringNumber resultado: ', resultado);
+    return resultado;    
   }
 
   /**
