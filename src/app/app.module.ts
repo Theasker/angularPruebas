@@ -21,7 +21,7 @@ import { MyCurrencyFormatterDirective } from './directivas/my-currency-formatter
   declarations: [
     AppComponent,
     ThousandsPipe,
-    MyCurrencyFormatterDirective
+    MyCurrencyFormatterDirective,
   ],
   imports: [
     BrowserModule,
