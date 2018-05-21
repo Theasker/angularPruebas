@@ -6,10 +6,11 @@ import localeEs from '@angular/common/locales/es';
 import { registerLocaleData } from '@angular/common';
 registerLocaleData(localeEs);
 
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 // Componentes
 import { AppComponent } from './app.component';
+import { ReactiveFormsComponent } from './reactive-forms/reactive-forms.component';
 
 // Filtros propios
 import { ThousandsPipe } from './pipes/thousands.pipe';
@@ -20,12 +21,14 @@ import { MyCurrencyFormatterDirective } from './directivas/my-currency-formatter
 @NgModule({
   declarations: [
     AppComponent,
+    ReactiveFormsComponent,
     ThousandsPipe,
     MyCurrencyFormatterDirective,
   ],
   imports: [
     BrowserModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   exports: [
     MyCurrencyFormatterDirective
