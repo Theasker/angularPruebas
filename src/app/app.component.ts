@@ -30,10 +30,8 @@ export class AppComponent implements OnInit {
       console.log('NO es número -> this.numero: ', this.numero);
     }else {
       //this.numero = parseFloat(value);
-      console.log('ES número -> this.numero: ', this.numero);
-      let stringNumber: string = String(value);
-      console.log('stringNumber: ', stringNumber);
-      this.numero = parseFloat(this.cleanString(stringNumber));
+      console.log('ES número -> String(value): ', String(value));
+      this.numero = parseFloat(this.cleanString(String(value)));
     }
   }
   
@@ -93,8 +91,8 @@ export class AppComponent implements OnInit {
     // No usar event.keycode está deprecado.
     // ver: https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/keyCode
     let current: string = String(this.numero);
-    // We need this because the current value on the DOM element
-    // is not yet updated with the value from this event
+    // Necesitamos esto porque el valor actual del elemento del DOM 
+    // aun no está actualizado con el valor desde este evento
     let next: string = current+ event.key;
     if (next && !String(next).match(regex)) {
       event.preventDefault();

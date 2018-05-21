@@ -6,22 +6,22 @@ import { Pipe, PipeTransform } from '@angular/core';
 
 export class ThousandsPipe implements PipeTransform {
   
+  /**
+   * Controlador que distribuye el parseo dependiendo de lo que le llega es numérico o no
+   * @param  {any} value
+   * @param  {any} args?
+   * @returns any
+   */
   transform(value: any, args?: any): any {
     console.log('Value: ', value + " / " + 'typeof(value): ' + typeof(value));
     let resultado: string;
-    /* if (value == null) {
-      value = 0;
-      return '0,00';
-    }  */
     if (isNaN(value)){ // NO es un número
       console.log('No es un número');
-      //resultado = this.cleanString(this.parseStringNumber(value));
-      console.log('resultado: ', resultado);
+      resultado = this.cleanString(this.parseStringNumber(value));
     }else { // Si es un número
       resultado = this.numberToString(value);
     }
     //resultado value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-    console.log('resultado: ', resultado);
     return resultado;
   }
 

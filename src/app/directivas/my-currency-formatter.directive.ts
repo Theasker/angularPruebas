@@ -17,12 +17,11 @@ export class MyCurrencyFormatterDirective implements OnInit {
   // Permite números decimales. El \. es para que ocurra sólo una vez
   private regex: RegExp = new RegExp(/^[0-9]+(\.[0-9]*){0,1}$/g);
   // Backspace, tab, end, home
-  private specialKeys: Array<string> = [ 'Backspace','Tab','End','Home','ArrowRight','ArrowLeft','Delete',',' ];
+  private specialKeys: Array<string> = [ 'Enter','Backspace','Tab','End','Home','ArrowRight','ArrowLeft','Delete',',' ];
   
   constructor(
     private _elementRef: ElementRef,
-    // private _currencyPipe: MyCurrencyPipe,
-    // private _thousandsPipe: ThousandsPipe
+
   ) {
     this.el = this._elementRef.nativeElement;
     console.log('Constructor: this.el.value: ', this.el.value);   
@@ -48,8 +47,8 @@ export class MyCurrencyFormatterDirective implements OnInit {
       console.log('Directiva: ES número -> this.numero: ');
     } */
     // this.el.value = this._currencyPipe.parse(value); // opossite of transform
-    this.el.value = this.cleanString(value);
-    console.log('this.cleanString(value): ', this.cleanString(value));
+    //this.el.value = this.cleanString(value);
+    this.el.value = this.numberToString(this.parseStringNumber(value))
   }
   
   @HostListener('blur', ['$event.target.value'])
@@ -60,8 +59,11 @@ export class MyCurrencyFormatterDirective implements OnInit {
     // this.el.value = this._currencyPipe.transform(value);
     let resultado: string;
     if (isNaN(value)){ // NO es un número
-      console.log('No es un número');
-      resultado = this.cleanString(this.parseStringNumber(value));
+      console.log('No es un número: ', value);
+      console.log('this.parseStringNumber(value): ', this.parseStringNumber(value));
+      console.log('this.cleanString(this.parseStringNumber(value)): ', this.cleanString(this.parseStringNumber(value)));
+      //resultado = this.cleanString(this.parseStringNumber(value));
+      resultado = this.numberToString(this.parseStringNumber(value));
     }else { // Si es un número
       resultado = this.numberToString(value);
     }
@@ -70,7 +72,6 @@ export class MyCurrencyFormatterDirective implements OnInit {
 
   @HostListener('keydown', [ '$event' ])
   onKeyDown(event: KeyboardEvent) {
-    console.log('event.key: ', event.key);
     // Permite Backspace, tab, end, y home keys
     if (this.specialKeys.indexOf(event.key) !== -1) {
       return;
@@ -79,12 +80,12 @@ export class MyCurrencyFormatterDirective implements OnInit {
     // No usar event.keycode está deprecado.
     // ver: https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/keyCode
     let current: string = this.el.value;
-    // We need this because the current value on the DOM element
-    // is not yet updated with the value from this event
+    // Necesitamos esto porque el valor actual del elemento del DOM 
+    // aun no está actualizado con el valor desde este evento
     let next: string = current.concat(event.key);
-    if (next && !String(next).match(this.regex)) {
-      event.preventDefault();
-    }
+    // if (next && !String(next).match(this.regex)) {
+    //   event.preventDefault();
+    // }
   }
 
   /**
