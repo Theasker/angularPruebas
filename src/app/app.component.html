@@ -1,10 +1,16 @@
-<app-reactive-forms></app-reactive-forms>
+<!-- <app-reactive-forms></app-reactive-forms> -->
 <div style="text-align:center">
+  <app-rating-input></app-rating-input>
+  
+  <number-input [label]="'Name:'" [(ngModel)]="InputVal" ></number-input>
+  InputVal: {{InputVal}}
+  
+  <!-- number:'1.2-2':'es-ES' -->
+  <!-- currency:cheatSymbol:'':'4.2-2':'es-ES' -->
+  <!-- (\d{1,3}\.)?(\d{1,3}\.)?\d{1,3}(\,\d)? -->
+    
+  <!-- <h4>Input con filtro</h4> -->
   <p>
-    <!-- number:'1.2-2':'es-ES' -->
-    <!-- currency:cheatSymbol:'':'4.2-2':'es-ES' -->
-    <!-- (\d{1,3}\.)?(\d{1,3}\.)?\d{1,3}(\,\d)? -->
-    Input con filtro<br />
     <!-- <input 
       name="numero"
       type="text"
@@ -12,38 +18,33 @@
       (change)="cambioCampo($event.target.value)"
       (ngModelChange)="numero=$event"
       (keypress)="pulsoTecla($event)"/> -->
-
+  
       <!-- <input 
       name="numero"
       type="text"
       [value]="numero | thousands"
       (change)="cambioCampo($event.target.value)"
       (keypress)="pulsoTecla($event)"
-      value="0,00" /> -->
+      value="0,00" />  -->
   </p>
+  <!-- <h4>Input con directiva:</h4>
   <p>
-    Input con directiva:<br />
     <input 
-      name="numero"
-      type="text" 
-      [(ngModel)]="numero"
-      appMyCurrencyFormatter />
-
-    <!-- <input 
       type="text" 
       name="numero"
       [value]="numero | thousands"
-      (change)="cambioCampo($event.target.value)"
-      (keypress)="pulsoTecla($event)"
-      appMyCurrencyFormatter /> -->
-  </p>
-<!--   <p>
+      (change)="numero=$event.target.value"
+      appMyCurrencyFormatter/>
+  </p> -->
+  <!-- <p>
     Configuración sólo con html5<br />
     <input id="html" type="number" step="any" [(ngModel)]="numero">
   </p> -->
     
-  <p>
-    <h4>Modelo:<br />{{numero}}</h4>
+  
+    <!-- <h5>Modelo:<br />{{numero}}</h5>
+    <h5>Modelo con pipe:<br />{{numero | thousands}}</h5> -->
+
   <!-- <h2>{{numero | number:'1.2-2':'es-ES'}}</h2> -->
   <!-- <h2>Currency: {{numero | currency:cheatSymbol:'':'4.2-2':'es-ES'}}</h2> -->
   <!-- <h4>currency de Angular: {{numero | currency:cheatSymbol:'':'4.2-2':'es-ES'}}</h4> -->
