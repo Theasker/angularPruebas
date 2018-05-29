@@ -36,7 +36,6 @@ export class InputTextNumberComponent implements OnInit, ControlValueAccessor {
   }
   registerOnChange(fn: any): void {
     this.propagateChange = fn;
-    console.log('this.propagateChange: ', this.propagateChange);
   }
   registerOnTouched(fn: any): void { 
     console.log('registerOnTouched fn: ', fn);

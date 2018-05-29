@@ -1,8 +1,26 @@
 <!-- <app-reactive-forms></app-reactive-forms> -->
 <div style="text-align:center">
-  <app-rating-input></app-rating-input>
+  <p><app-rating-input></app-rating-input></p>
   
-  <number-input [label]="'Name:'" [(ngModel)]="InputVal" ></number-input>
+  <p>
+    <app-control-value-accessor
+    type="text"  
+    id="coin" 
+    name="coin"  
+    [(ngModel)]="inputText"  
+    #coin="ngModel" 
+    required 
+    [disabled]="false" 
+    (change)="test($event.target.value)">
+  </app-control-value-accessor><br />
+  </p>  
+  <p>Modelo inputText: {{inputText}}</p>
+  <p>coin: {{coin}}</p>
+  
+  <number-input 
+    [label]="'Name:'" 
+    [(ngModel)]="InputVal" >
+  </number-input>
   InputVal: {{InputVal}}
   
   <!-- number:'1.2-2':'es-ES' -->

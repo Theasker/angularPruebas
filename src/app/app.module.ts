@@ -18,6 +18,7 @@ import { ThousandsPipe } from './pipes/thousands.pipe';
 import { MyCurrencyFormatterDirective } from './directivas/my-currency-formatter.directive';
 import { InputTextNumberComponent } from './input-text-number/input-text-number.component';
 import { RatingInputComponent } from './rating-input/rating-input.component';
+import { ControlValueAccessorComponent } from './control-value-accessor/control-value-accessor.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { RatingInputComponent } from './rating-input/rating-input.component';
     ThousandsPipe,
     MyCurrencyFormatterDirective,
     InputTextNumberComponent,
-    RatingInputComponent
+    RatingInputComponent,
+    ControlValueAccessorComponent
   ],
   imports: [
     BrowserModule,

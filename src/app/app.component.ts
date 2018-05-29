@@ -10,6 +10,8 @@ import { merge } from 'rxjs';
 
 export class AppComponent implements OnInit {
   public numero: number;
+  public inputText: string;
+  public coin: string;
   
   constructor() {  }
   
@@ -17,7 +19,11 @@ export class AppComponent implements OnInit {
     if (this.numero == null){
       this.numero = 0.00;
     }    
-  }  
+  }
+
+  test(event: any): void {
+    console.log('event: ', event);
+  }
   
   /**
    * Controla el cambio del input para parsear el varlor dependiendo del dato recibido
