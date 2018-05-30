@@ -12,6 +12,7 @@ export class AppComponent implements OnInit {
   public numero: number;
   public inputText: string;
   public coin: string;
+  public InputVal: string;
   
   constructor() {  }
   
@@ -21,8 +22,8 @@ export class AppComponent implements OnInit {
     }    
   }
 
-  test(event: any): void {
-    console.log('event: ', event);
+  eventoRecibido(value: string) {
+    console.log('eventoRecibido value: ', value);
   }
   
   /**
