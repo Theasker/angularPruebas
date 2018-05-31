@@ -22,8 +22,9 @@ export class AppComponent implements OnInit {
     }    
   }
 
-  eventoRecibido(value: string) {
+  eventoRecibido(value: number) {
     console.log('eventoRecibido value: ', value);
+    console.log('typeof(value): ', typeof(value));
   }
   
   /**

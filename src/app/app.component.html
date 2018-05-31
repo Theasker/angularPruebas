@@ -7,19 +7,13 @@
   <div class="alert alert-primary" role="alert">
     <h5>app-control-value-accessor</h5>
     <app-control-value-accessor
-      type="text"  
-      id="coin" 
-      name="coin"  
-      [(ngModel)]="inputText"  
-      [(ngModel)]="numero"
-      #coin="ngModel" 
+     [(value)]="numero"
       required 
-      [disabled]="false" 
-      (numeroComponenteChange)="eventoRecibido(numero)">
+      >
     </app-control-value-accessor>
+    <h5><u>Componente padre</u></h5>
     <p>Modelo inputText: {{inputText}}</p>
-    <p>coin: {{coin}}</p>
-    <p>numero: {{numero}}</p>
+    <p>Modelo a guardar: {{numero}}</p>
   </div>
   <!-- <div class="alert alert-primary" role="alert">
     <h4>number-input</h4>
