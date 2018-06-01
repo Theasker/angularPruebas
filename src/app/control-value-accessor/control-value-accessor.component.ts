@@ -6,7 +6,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
   template: `
   <input 
     type="text" 
-    [(ngModel)]="value" 
+    [(ngModel)]="valueInputText" 
     (focus)="onFocus($event)" 
     (change)="onChange($event)" 
     (blur)="onBlur($event)"
@@ -25,8 +25,11 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 ]
 })
 export class ControlValueAccessorComponent implements OnInit, ControlValueAccessor {
-  @Input('value') value: string = '1.234,56';
-  @Output() numeroComponenteChange: EventEmitter<number> = new EventEmitter<number>();
+  //@Input('value') value: string = '1.234,56';
+  public valueInputText: string;
+
+  @Input('value') value: number;
+  @Output() valueChange: EventEmitter<number> = new EventEmitter<number>();
       
   private propagateChange = (_: any) => { };
   private propagateTouch = (_: any) => { };
@@ -41,9 +44,7 @@ export class ControlValueAccessorComponent implements OnInit, ControlValueAccess
   private specialKeys: Array<string> = ['Enter','Backspace','Tab','End','Home','ArrowRight','ArrowLeft','Delete',','];
   private commaCounter: number; // Contador de comas
   
-  constructor() {
-    
-  }
+  constructor() {  }
 
   ngOnInit(): void {
     this.commaCounter = 0;
@@ -51,70 +52,75 @@ export class ControlValueAccessorComponent implements OnInit, ControlValueAccess
 
   onFocus(event: any): void {
     console.log('onFocus event.target.value: ', event.target.value);
-    console.log('onFocus this.value: ', this.value);
-    if (this.value) {
-      this.commaCounter = this.counterString(this.value,',');
+    console.log('onFocus this.valueInputText: ', this.valueInputText);
+    if (this.valueInputText) {
+      this.commaCounter = this.counterString(this.valueInputText,',');
     }else {
       this.commaCounter = 0;
     }
+    if (this.valueInputText == null){
+      this.valueInputText = '0,00';
+    }
     // Elimino todos los puntos ('.') del string
     let regex = /\./g;
-    this.value = this.value.replace(regex, '');
-    console.log('onFocus this.value: ', this.value);
+    this.valueInputText = this.valueInputText.replace(regex, '');
+    console.log('onFocus this.valueInputText: ', this.valueInputText);
     console.log('onFocus this.commaCounter: ', this.commaCounter);
   }
 
   onKeydown(event: KeyboardEvent): void {
-    console.log('onKeydown event.key: ', event.key);
+    //console.log('onKeydown event.key: ', event.key);
     if (this.specialKeys.indexOf(event.key) != -1 || String(event.key).match(this.regexNumber) || event.key == ',') {
       if (event.key == ','){
         if (this.commaCounter == undefined) {
           this.commaCounter = 0;
-          console.log('this.commaCounter: ', this.commaCounter);
+          //console.log('this.commaCounter: ', this.commaCounter);
         }else if (this.commaCounter > 0){
           event.preventDefault();          
-          console.log('onKeydown preventDefault');
+          //console.log('onKeydown preventDefault');
         }else {
           this.commaCounter++;
+          return;
         }
       }
-      console.log('onKeydown return: ');
+      //console.log('onKeydown return: ');
       return;
     }else {
-      console.log('onKeydown preventDefault');
+      //console.log('onKeydown preventDefault');
       event.preventDefault();
     }
   }
 
   onBlur(event: any): void {
-    console.log('onBlur this.value (antes) ', this.value);
-    if (this.value) {
-      this.commaCounter = this.counterString(this.value,',');
+    console.log('onBlur this.valueInputText (antes) ', this.valueInputText);
+    if (this.valueInputText) {
+      this.commaCounter = this.counterString(this.valueInputText,',');
     }else {
       this.commaCounter = 0;
     }
     // Elimino todos los puntos ('.') del string
     let regex = /\./g;
-    this.value = this.value.replace(regex, '');
+    this.valueInputText = this.valueInputText.replace(regex, '');
 
-    this.value = this.thousandsSeparator(this.value);
-    console.log('onBlur this.value (despues): ', this.value);
-    console.log('onBlur this.parseStringNumber(this.value): ', this.parseStringNumber(this.value));
-    let temp: number = parseFloat(this.parseStringNumber(this.value));
-    console.log('onBlur temp: ', temp, typeof(temp));
-    this.numeroComponenteChange.emit(temp);    
+    this.valueInputText = this.thousandsSeparator(this.valueInputText);
+    // console.log('onBlur this.valueInputText (despues): ', this.valueInputText);
+    // console.log('onBlur this.parseStringNumber(this.valueInputText): ', this.parseStringNumber(this.valueInputText));
+    this.value = this.parseStringNumber(this.valueInputText);
+    // console.log('onBlur this.value: ', this.value, typeof(this.value));
+    
+    this.valueChange.emit(this.value); 
   }
 
   private onChange(event : any) {
-    this.propagateChange(this.value);
-    console.log('onChange this.value (antes): ', this.value);
-    this.value = this.thousandsSeparator(this.value);
-    console.log('onChange this.value (después): ', this.value);
-    console.log('onChange this.parseStringNumber(this.value): ', this.parseStringNumber(this.value));
-    let temp: number = parseFloat(this.parseStringNumber(this.value));
-    console.log('onChange temp: ', temp, typeof(temp));
+    this.propagateChange(this.valueInputText);
+    //console.log('onChange this.valueInputText (antes): ', this.valueInputText);
+    this.valueInputText = this.thousandsSeparator(this.valueInputText);
+    // console.log('onChange this.valueInputText (después): ', this.valueInputText);
+    // console.log('onChange this.parseStringNumber(this.valueInputText): ', this.parseStringNumber(this.valueInputText));
+    this.value = this.parseStringNumber(this.valueInputText);
+    // console.log('onChange this.value: ', this.value, typeof(this.value));
     
-    this.numeroComponenteChange.emit(temp); 
+    this.valueChange.emit(this.value); 
   }
 
   /**
@@ -126,7 +132,7 @@ export class ControlValueAccessorComponent implements OnInit, ControlValueAccess
   writeValue(value: any): void {
     // console.log('writeValue value: ', value);
     if (value) {
-      this.value = value;
+      this.valueInputText = value;
     }
   }
   
@@ -149,8 +155,6 @@ export class ControlValueAccessorComponent implements OnInit, ControlValueAccess
   registerOnTouched(fn: () => void): void {
       this.propagateTouch = fn;
   }
-
-  
 
   private onChangeModel(value: any) {
     console.log('onChangeModel value: ', value);
@@ -222,19 +226,18 @@ export class ControlValueAccessorComponent implements OnInit, ControlValueAccess
   }
 
   /**
-   * Convierte un numero con formato 10.000.000,00 a un número 10000000.00
+   * Convierte un string con formato 10.000.000,00 a un número 10000000.00
    * @param {string} stringNumber
    * @returns string
    */
-  public parseStringNumber (stringNumber: string): string {
+  public parseStringNumber (stringNumber: string): number {
     let resultado: string;
-    let search: string = '.';
-    let replacement: string = '';
     resultado = stringNumber;
-    let temp: string[] = resultado.split(search);
-    resultado = temp.join(replacement);
+    resultado = resultado.replace(/\./g, '');
     resultado = resultado.replace(',', '.');
-    return resultado;
+    return parseFloat(resultado);
   }
+
+  
   
 }
