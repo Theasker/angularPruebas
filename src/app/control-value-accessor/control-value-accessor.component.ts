@@ -69,6 +69,8 @@ export class ControlValueAccessorComponent implements OnInit, ControlValueAccess
   }
 
   onKeydown(event: KeyboardEvent): void {
+    console.log('onKeydown');
+    /*
     //console.log('onKeydown event.key: ', event.key);
     if (this.specialKeys.indexOf(event.key) != -1 || String(event.key).match(this.regexNumber) || event.key == ',') {
       if (event.key == ','){
@@ -88,6 +90,22 @@ export class ControlValueAccessorComponent implements OnInit, ControlValueAccess
     }else {
       //console.log('onKeydown preventDefault');
       event.preventDefault();
+    }
+    */
+
+  //////////////////////////////////////////////////
+ 
+  console.log('onKeydown event.key: ', event.key);    
+  if (this.specialKeys.indexOf(event.key) != -1 || String(event.key).match(this.regexNumber) || event.key == ',') {
+    if (event.key == ','){
+      if(this.valueInputText.search(',') >= 0){
+        event.preventDefault();        
+      }
+    }
+      return;
+    }else {
+      //console.log('onKeydown preventDefault');      
+      event.preventDefault();    
     }
   }
 
