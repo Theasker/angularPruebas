@@ -8,7 +8,7 @@
  * http://tylerscode.com/2017/03/splitting-angular-forms-controlvalueaccessor/
  * 
  */
-import { Component, OnInit, OnDestroy, Input, Output, EventEmitter, forwardRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, Output, EventEmitter, forwardRef, ElementRef, ViewChild } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 
 @Component({
